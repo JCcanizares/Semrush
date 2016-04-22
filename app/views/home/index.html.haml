@@ -10,10 +10,10 @@
             .col-xs-12
               %h2 Domain info
             .col-xs-12.col-sm-8
-              %h3= @semrush_data.first.domain
+              %h3= @semrush_data_us.first.domain
               %h4
                 %strong Keywords:
-                = @semrush_data.size
+                = @semrush_data_us.size
             .col-xs-12.col-sm-4
               %ul.nav.nav-pills
                 %li.active
@@ -66,21 +66,13 @@
                         %tr
                           %td + 50
                           %td --
-    / .row
-    /   .col-xs-12
-    /     .well
-    /       %ul.nav.nav-tabs
-    /         %li.active
-    /           %a{"data-toggle" => "tab", :href => "#home"} Tab 1
-    /         %li
-    /           %a{"data-toggle" => "tab", :href => "#menu1"} Tab 2
-    /       .tab-content
-    /         #home.tab-pane.fade.in.active
-    /           %h3 Tab 1
-    /           %p Some content.
-    /         #menu1.tab-pane.fade
-    /           %h3 Tab 2
-    /           %p Some content in menu 1.
+    .row
+      .col-xs-12
+        #chart_traffic_day_keyword
+        
+    .row
+      .col-xs-12
+        #chart_div
     .row
       .col-xs-12
         .well
@@ -91,19 +83,17 @@
                   %th Keyword
                   %th Position
                   %th Volume
-                  %th KD
                   %th CPC(USD)
                   %th url
                   %th Traffic%
                   %th Costs%
                   %th Results
               %tbody
-                -@semrush_data.each do |d|
+                -@semrush_data_us.each do |d|
                   %tr
                     %td= d.keyword
                     %td= d.position
                     %td= d.volume
-                    %td KD
                     %td= d.cpc
                     %td
                       = link_to d.url, target: "_blank" do
@@ -114,3 +104,31 @@
     %footer
   .container
     %p
+:javascript
+    // START -- GOOGLE CHARTS --//
+    google.charts.load('current', {packages: ['corechart', 'bar']});
+    google.charts.setOnLoadCallback(drawBasic);
+
+    function drawBasic() {
+
+      var data = new google.visualization.arrayToDataTable("#{@chart_traffic_day_keyword_data}", false);
+      data.addColumn('date', 'Day');
+      data.addColumn('number', 'Traffic per Keyword');
+
+      var options = {
+        title: '% Trafic per Keyword',
+        hAxis: {
+          title: 'Traffic per Keyword (%)',
+          format: 'percent',
+        },
+        vAxis: {
+          title: '% (0-100)'
+        }
+      };
+
+      var chart = new google.visualization.ColumnChart(
+        document.getElementById('chart_traffic_day_keyword'));
+
+      chart.draw(data, options);
+    }
+    // END -- GOOGLE CHARTS --//
