@@ -1,1 +1,116 @@
-%p home semrush
+%header
+  .container
+    %h1 Semrush Volcanic Dashboard
+%section#semrush-dashboard
+  .container
+    .row.row-eq-height
+      .col-sm-6.col-md-6
+        .well
+          .row
+            .col-xs-12
+              %h2 Domain info
+            .col-xs-12.col-sm-8
+              %h3= @semrush_data.first.domain
+              %h4
+                %strong Keywords:
+                = @semrush_data.size
+            .col-xs-12.col-sm-4
+              %ul.nav.nav-pills
+                %li.active
+                  %a{"data-toggle" => "pill", :href => "#menu1"} Google US
+                %li
+                  %a{"data-toggle" => "pill", :href => "#menu2"} Google UK
+      .col-sm-6.col-md-6
+        .well
+          .row
+            .tab-content
+              #menu1.tab-pane.fade.in.active
+                .col-xs-12
+                  %h2 Keywords
+                  .col-xs-12.col-sm-4
+                    .table-responsive
+                      %table.table.top-keywords
+                        %tr
+                          %td Top 3
+                          %td= @range_1.size
+                        %tr
+                          %td 4 - 10
+                          %td= @range_2.size
+                        %tr
+                          %td 11 - 20
+                          %td= @range_3.size
+                        %tr
+                          %td 21 - 50
+                          %td= @range_4.size
+                        %tr
+                          %td + 50
+                          %td= @range_5.size
+              #menu2.tab-pane.fade
+                .col-xs-12
+                  %h2 Keywords
+                  .col-xs-12.col-sm-4
+                    .table-responsive
+                      %table.table.top-keywords
+                        %tr
+                          %td Top 3
+                          %td --
+                        %tr
+                          %td 4 - 10
+                          %td --
+                        %tr
+                          %td 11 - 20
+                          %td --
+                        %tr
+                          %td 21 - 50
+                          %td --
+                        %tr
+                          %td + 50
+                          %td --
+    / .row
+    /   .col-xs-12
+    /     .well
+    /       %ul.nav.nav-tabs
+    /         %li.active
+    /           %a{"data-toggle" => "tab", :href => "#home"} Tab 1
+    /         %li
+    /           %a{"data-toggle" => "tab", :href => "#menu1"} Tab 2
+    /       .tab-content
+    /         #home.tab-pane.fade.in.active
+    /           %h3 Tab 1
+    /           %p Some content.
+    /         #menu1.tab-pane.fade
+    /           %h3 Tab 2
+    /           %p Some content in menu 1.
+    .row
+      .col-xs-12
+        .well
+          .table-responsive
+            %table.table#data-table
+              %thead
+                %tr
+                  %th Keyword
+                  %th Position
+                  %th Volume
+                  %th KD
+                  %th CPC(USD)
+                  %th url
+                  %th Traffic%
+                  %th Costs%
+                  %th Results
+              %tbody
+                -@semrush_data.each do |d|
+                  %tr
+                    %td= d.keyword
+                    %td= d.position
+                    %td= d.volume
+                    %td KD
+                    %td= d.cpc
+                    %td
+                      = link_to d.url, target: "_blank" do
+                        = d.url.truncate(20)
+                    %td= d.traffic_percent
+                    %td= d.costs_percent
+                    %td= d.results
+    %footer
+  .container
+    %p

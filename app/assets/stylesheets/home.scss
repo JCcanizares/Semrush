@@ -1,3 +1,200 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+//VARIABLES
+$bg-color: #FFFFFF;
+$bg-light: #F5F5F5;
+$bg-dark: #37474F;
+$main-color: #37474F;
+$primary-color: #E57C29;
+
+.trans {
+   -webkit-transition: all 0.3s;
+   -moz-transition: all 0.3s;
+   transition: all 0.3s;
+}
+//SEMRUSH DASHBOARD STYLE
+body{
+  font-size: 1.0em;
+  line-height: 100%;
+  text-align: left;
+  background: $bg-color;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: none;
+  -webkit-font-smoothing: antialiased;
+  ::-moz-selection { background: rgba($primary-color,0.8); color: #ffffff!important; }
+  ::selection { background: rgba($primary-color,0.8); color: #ffffff!important; }
+  p{
+    font-size: 17px;
+    font-size: 1.7rem;
+    line-height: normal;
+  }
+  h2{
+    font-size: 30px;
+    font-size: 3rem;
+  }
+  h3{
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+  h4{
+    font-size: 21px;
+    font-size: 2.1rem;
+  }
+  h5{
+    font-size: 19px;
+    font-size: 1.9rem;
+  }
+  a{
+    @extend .trans;
+    font-size: 17px;
+    font-size: 1.7rem;
+    line-height: normal;
+    font-weight: 600;
+    color: $primary-color;
+    &:hover{
+      color: $bg-dark;
+    }
+  }
+}
+header{
+  background: $bg-dark;
+  padding: 15px 0;
+  h1{
+    color: #FFFFFF;
+    margin: 0;
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+}
+#semrush-dashboard{
+  padding: 30px 0 50px 0;
+  background: $bg-light;
+  h2{
+    padding: 0 0 10px 0;
+    margin: 0 0 15px 0;
+    border-bottom: 2px solid $primary-color;
+  }
+  h3, h4, h5{
+    margin: 0 0 15px 0;
+  }
+  table{
+    font-size: 17px;
+    font-size: 1.7rem;
+    thead{
+      tr{
+        th{
+          border-color: $primary-color;
+        }
+      }
+    }
+    &.top-keywords{
+      tr{
+        td{
+          text-align: right;
+          border: none;
+          border-bottom: 1px solid #DDDDDD;
+          &:nth-child(1){
+            text-align: left;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+}
+
+//TABLE SPECIAL STYLE
+#data-table_wrapper{
+  #data-table_length{
+    float: left;
+    margin-bottom: 15px;
+    *{
+      font-size: 17px;
+      font-size: 1.7rem;
+      line-height: normal;
+    }
+  }
+  #data-table_filter{
+    float: right;
+    margin-bottom: 15px;
+    *{
+      font-size: 17px;
+      font-size: 1.7rem;
+      line-height: normal;
+    }
+  }
+  #data-table_info{
+    float: left;
+    padding: 0;
+    font-weight: 600;
+    margin-top: 20px;
+    font-size: 17px;
+    font-size: 1.7rem;
+    line-height: normal;
+  }
+  #data-table_paginate{
+    float: right;
+    margin-top: 20px;
+    a{
+      padding: 5px;
+      &.current{
+        color: $main-color;
+      }
+      &:hover{
+        cursor: pointer;
+      }
+    }
+  }
+}
+//BOOTSTRAP OVERWRITE
+.well{
+  background: $bg-color;
+}
+.nav-pills{
+  li{
+    float: none;
+    margin-bottom: 10px;
+    a{
+      width: 100%;
+      display: block;
+      background: $bg-light;
+      &:hover{
+        background-color: $bg-dark;
+        color: #FFFFFF;
+      };
+    }
+    &.active{
+      a, a:focus{
+        background-color: $bg-dark;
+        color: #FFFFFF;
+      }
+    }
+  }
+}
+
+/*
+ * Row with equal height columns
+ * --------------------------------------------------
+ */
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+  &.vertical-center {
+    align-items: center;
+  }
+}
+
+@media (max-width: 991px) {
+  .row-eq-height {
+    display: block!important;
+  }
+}
+
+
+
+
+

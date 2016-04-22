@@ -14,3 +14,8 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+//= require jquery
+//= require bootstrap-sprockets
+//= require custom.js
+//= require dataTables.bootstrap.min
+//= require jquery.dataTables.min
