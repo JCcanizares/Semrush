@@ -85,7 +85,7 @@ header{
     thead{
       tr{
         th{
-          border-color: $primary-color;
+//          border-color: $primary-color;
         }
       }
     }
@@ -103,10 +103,19 @@ header{
       }
     }
   }
+  #chart_traffic_day_keyword, #chart_top_keywords_traffic{
+    border: 1px solid #DDDDDD;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    background: $bg-color;
+  }
 }
 
 //TABLE SPECIAL STYLE
 #data-table_wrapper{
+  .popover{
+    width: 200px;
+  }
   #data-table_length{
     float: left;
     margin-bottom: 15px;

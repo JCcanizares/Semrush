@@ -3,10 +3,8 @@ $(document).ready(function() {
     "order": [[ 2, "desc" ]]
   });
     
-    
-  // START -- GOOGLE CHARTS --//
+  $('[data-toggle="popover"]').popover({
+    placement: 'left'
+  }); 
 
-
-  // END -- GOOGLE CHARTS --//
-    
-} );
+});

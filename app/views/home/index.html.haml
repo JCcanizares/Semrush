@@ -4,90 +4,94 @@
 %section#semrush-dashboard
   .container
     .row.row-eq-height
-      .col-sm-6.col-md-6
+      .col-sm-6.col-md-3
         .well
           .row
             .col-xs-12
               %h2 Domain info
-            .col-xs-12.col-sm-8
-              %h3= @semrush_data_us.first.domain
+            .col-xs-12
+              %h3=@semrush_data_us.first.domain
               %h4
                 %strong Keywords:
                 = @semrush_data_us.size
-            .col-xs-12.col-sm-4
-              %ul.nav.nav-pills
-                %li.active
-                  %a{"data-toggle" => "pill", :href => "#menu1"} Google US
-                %li
-                  %a{"data-toggle" => "pill", :href => "#menu2"} Google UK
-      .col-sm-6.col-md-6
-        .well
-          .row
-            .tab-content
-              #menu1.tab-pane.fade.in.active
-                .col-xs-12
-                  %h2 Keywords
-                  .col-xs-12.col-sm-4
-                    .table-responsive
-                      %table.table.top-keywords
-                        %tr
-                          %td Top 3
-                          %td= @range_1.size
-                        %tr
-                          %td 4 - 10
-                          %td= @range_2.size
-                        %tr
-                          %td 11 - 20
-                          %td= @range_3.size
-                        %tr
-                          %td 21 - 50
-                          %td= @range_4.size
-                        %tr
-                          %td + 50
-                          %td= @range_5.size
-              #menu2.tab-pane.fade
-                .col-xs-12
-                  %h2 Keywords
-                  .col-xs-12.col-sm-4
-                    .table-responsive
-                      %table.table.top-keywords
-                        %tr
-                          %td Top 3
-                          %td --
-                        %tr
-                          %td 4 - 10
-                          %td --
-                        %tr
-                          %td 11 - 20
-                          %td --
-                        %tr
-                          %td 21 - 50
-                          %td --
-                        %tr
-                          %td + 50
-                          %td --
+              %h4
+                %strong Last update: 
+                %br
+                = @semrush_data_us.first.day
+      .col-sm-6.col-md-9
+        #chart_traffic_day_keyword
     .row
       .col-xs-12
-        #chart_traffic_day_keyword
         
     .row
       .col-xs-12
-        #chart_div
+        .well
+          %h2 Today's report 
+          .row
+            .col-sm-6.col-md-6
+              .row
+                .tab-content
+                  #menu1.tab-pane.fade.in.active
+                    .col-xs-12
+                      .col-xs-12.col-sm-4
+                        %h3 Engine
+                        %ul.nav.nav-pills
+                          %li.active
+                            %a{"data-toggle" => "pill", :href => "#menu1"} Google US
+                      .col-xs-12.col-sm-8
+                        %h3 Keywords
+                        .table-responsive
+                          %table.table.top-keywords
+                            %tr
+                              %td 
+                                %a{"data-content" => "Results between positions 1 and 3", "data-toggle" => "popover", "data-trigger" => "hover", :href => "#"}Top 3
+                              %td
+                                %a{"data-content" => "#{@range_1_keywords.map(&:inspect).join(', ').gsub! '"', ''}", "data-toggle" => "popover", "data-trigger" => "hover", :href => "#"}=@range_1.size
+                            %tr
+                              %td 
+                                %a{"data-content" => "Results between positions 4 and 10", "data-toggle" => "popover", "data-trigger" => "hover", :href => "#"}4 - 10
+                              %td
+                                %a{"data-content" => "#{@range_2_keywords.map(&:inspect).join(', ').gsub! '"', ''}", "data-toggle" => "popover", "data-trigger" => "hover", :href => "#"}=@range_2.size
+                            %tr
+                              %td
+                                %a{"data-content" => "Results between positions 11 and 21", "data-toggle" => "popover", "data-trigger" => "hover", :href => "#"}11 - 20
+                              %td
+                                %a{"data-content" => "#{@range_3_keywords.map(&:inspect).join(', ').gsub! '"', ''}", "data-toggle" => "popover", "data-trigger" => "hover", :href => "#"}=@range_3.size
+                            %tr
+                              %td
+                                %a{"data-content" => "Results between positions 21 and 50", "data-toggle" => "popover", "data-trigger" => "hover", :href => "#"}21 - 50
+                              %td
+                                %a{"data-content" => "#{@range_4_keywords.map(&:inspect).join(', ').gsub! '"', ''}", "data-toggle" => "popover", "data-trigger" => "hover", :href => "#"}=@range_4.size
+                            %tr
+                              %td
+                                %a{"data-content" => "Results positions +50", "data-toggle" => "popover", "data-trigger" => "hover", :href => "#"}+ 50
+                              %td
+                                %a{"data-content" => "#{@range_5_keywords.map(&:inspect).join(', ').gsub! '"', ''}", "data-toggle" => "popover", "data-trigger" => "hover", :href => "#"}=@range_5.size
+    .row
+      .col-xs-12
+        #chart_top_keywords_traffic
     .row
       .col-xs-12
         .well
+          %h3 Keywords detail
           .table-responsive
             %table.table#data-table
               %thead
                 %tr
                   %th Keyword
-                  %th Position
-                  %th Volume
-                  %th CPC(USD)
+                  %th
+                    %a{"data-content" => "The position the domain gets in organic search for the given keyword.", "data-toggle" => "popover", "data-trigger" => "hover", :href => "#"}Position
+                  %th 
+                    %a{"data-content" => "The average of searches for the given keyword in the last 12 months.", "data-toggle" => "popover", "data-trigger" => "hover", :href => "#"}Volume
+                  %th
+                    %a{"data-content" => "Average price advertisers pay for a user’s click on an ad triggered by the given keyword (Google AdWords).", "data-toggle" => "popover", "data-trigger" => "hover", :href => "#"}CPC(USD)
                   %th url
-                  %th Traffic%
-                  %th Costs%
-                  %th Results
+                  %th
+                    %a{"data-content" => "The share of traffic driven to the website with the given keyword.", "data-toggle" => "popover", "data-trigger" => "hover", :href => "#"}Traffic%
+                  %th
+                    %a{"data-content" => "Estimated price of the given keyword in Google AdWords.", "data-toggle" => "popover", "data-trigger" => "hover", :href => "#"}Costs%
+                  %th
+                    %a{"data-content" => "The number of URLs displayed in organic search results for the given keyword.", "data-toggle" => "popover", "data-trigger" => "hover", :href => "#"}Results
               %tbody
                 -@semrush_data_us.each do |d|
                   %tr
@@ -107,28 +111,60 @@
 :javascript
     // START -- GOOGLE CHARTS --//
     google.charts.load('current', {packages: ['corechart', 'bar']});
-    google.charts.setOnLoadCallback(drawBasic);
+    google.charts.setOnLoadCallback(drawCharts);
 
-    function drawBasic() {
-
-      var data = new google.visualization.arrayToDataTable("#{@chart_traffic_day_keyword_data}", false);
-      data.addColumn('date', 'Day');
-      data.addColumn('number', 'Traffic per Keyword');
+    function drawCharts() {
+      var data = new google.visualization.arrayToDataTable(#{[['date', 'Traffic/Keyword']] + @chart_traffic_day_keyword_data});
+      var top_keywords_traffic = new google.visualization.arrayToDataTable(#{[['Keyword', '% Traffic']] + @actual_top_keywords_traffic});
 
       var options = {
-        title: '% Trafic per Keyword',
+        title: '% of Traffic per Keyword - Last month',
+        width: '100%',
+        height: 350,
+        colors: ['#FFA243'],
+        fontSize: 16,
         hAxis: {
-          title: 'Traffic per Keyword (%)',
-          format: 'percent',
+          title: 'Days',
+          format: '#,###%',
+          gridlines: {
+            units: {
+              years: {format: ['%Y']},
+              months: {format: ['%m']},
+              days: {format: ['%d']}
+            }
+          }
         },
         vAxis: {
-          title: '% (0-100)'
+          title: '% Traffic(0-100)'
+        }
+      };
+      var top_keywords_traffic_options = {
+        title: "Today's Top 10 Keywords per %Traffic created",
+        width: '100%',
+        height: 350,
+        colors: ['#FFA243'],
+        fontSize: 16,
+        hAxis: {
+          title: 'Keywords',
+          format: '#,###%',
+          gridlines: {
+            units: {
+              years: {format: ['%Y']},
+              months: {format: ['%m']},
+              days: {format: ['%d']}
+            }
+          }
+        },
+        vAxis: {
+          title: '% Traffic (0-100)'
         }
       };
 
-      var chart = new google.visualization.ColumnChart(
-        document.getElementById('chart_traffic_day_keyword'));
+      var chart = new google.visualization.ColumnChart(document.getElementById('chart_traffic_day_keyword'));
+        
+      var  chart_top_keywords_traffic = new google.visualization.ColumnChart(document.getElementById('chart_top_keywords_traffic'));
 
       chart.draw(data, options);
+      chart_top_keywords_traffic.draw(top_keywords_traffic,  top_keywords_traffic_options);
     }
     // END -- GOOGLE CHARTS --//
