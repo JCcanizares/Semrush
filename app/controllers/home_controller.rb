@@ -49,5 +49,10 @@ class HomeController < ApplicationController
       @actual_top_keywords_traffic << [d.keyword, d.traffic_percent]
     end
     
+    @top_volume_keywords = []
+    @semrush_data_us.take(20).each do |d|
+      @top_volume_keywords << [d.volume, d.position, d.traffic_percent]
+    end
+    
   end
 end

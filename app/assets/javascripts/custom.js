@@ -3,8 +3,9 @@ $(document).ready(function() {
     "order": [[ 2, "desc" ]]
   });
     
-  $('[data-toggle="popover"]').popover({
-    placement: 'left'
-  }); 
+  var options = {
+      placement: 'auto right'
+  };
+  $('[data-toggle="popover"]').popover(options); 
 
 });
