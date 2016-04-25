@@ -7,5 +7,4 @@ $(document).ready(function() {
       placement: 'auto right'
   };
   $('[data-toggle="popover"]').popover(options); 
-
 });
